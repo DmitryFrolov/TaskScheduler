@@ -2,7 +2,7 @@
 
 Scheduler::Scheduler()
     : go_on(true),
-    thread(new std::thread([this]() { ThreadLoop(); }))
+    thread(std::make_unique<std::thread>([this]() { ThreadLoop(); }))
     {}
 
 Scheduler::~Scheduler()
