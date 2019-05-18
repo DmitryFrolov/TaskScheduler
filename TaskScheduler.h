@@ -4,6 +4,8 @@
 #include <memory>
 #include <functional>
 
+namespace
+{
 // Special structure
 struct function_timer
 {
@@ -30,6 +32,7 @@ struct function_timer
         func();
     }
 };
+}
 
 // TODO: also it would be a good idea to implement a way to remove endless task from the queue
 class Scheduler
