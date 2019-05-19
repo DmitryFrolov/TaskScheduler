@@ -5,6 +5,8 @@ set(SCHEDULER task_scheduler)
 set(HEADERS TaskScheduler.h)
 set(SOURCES TaskScheduler.cpp)
 
+set ( CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+
 add_library(${SCHEDULER} ${SOURCES} ${HEADERS})
 target_include_directories(${SCHEDULER}
                            PUBLIC ./)
