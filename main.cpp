@@ -20,6 +20,6 @@ int main(int argc, char const *argv[])
     sch.ScheduleRepeatable(std::chrono::seconds(1), [&]{
         std::cout << "Limited calls" << std::endl;
     }, 3);
-    while (true);
+    while (true); // Keep running
     return 0;
 }

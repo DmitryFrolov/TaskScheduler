@@ -2,6 +2,7 @@
 #include <chrono>
 #include <thread>
 #include <memory>
+#include <ctime>
 #include <functional>
 
 namespace
@@ -50,17 +51,15 @@ public:
     ~Scheduler();
     // Schedule single call of @func when the @time comes
     void ScheduleAt(const std::chrono::system_clock::time_point &time, std::function<void()> &&func);
-    // Same with @time in format "%s %M %H %d %m %Y" "sec min hour date month year"
-    void ScheduleAt(const std::string &time, std::function<void()> func);
-    // Schedule endless calls of @func with given @inverval
+    // Schedule endless calls of @func with given @interval
     void ScheduleEndless(std::chrono::system_clock::duration interval, std::function<void()> func);
-    // Schedule @repeats amount of calls of @func with given @inverval
+    // Schedule @repeats amount of calls of @func with given @interval
     void ScheduleRepeatable(std::chrono::system_clock::duration interval, std::function<void()> func, int repeats);
 
 private:
     // Insert task into tasks pool
     void ScheduleTask(const std::chrono::system_clock::time_point &time, std::function<void()> &&func);
-    /// Shedule @func call after @interval time if @repeats not equals to 0
+    /// Schedule @func call after @interval time if @repeats not equals to 0
     /// Use repeats < 0 for endless scheduling
     void ScheduleEveryIntern(std::chrono::system_clock::duration interval, std::function<void()> func, int repeats);
     void ThreadLoop();

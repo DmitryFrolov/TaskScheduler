@@ -8,8 +8,11 @@ set(SOURCES TaskScheduler.cpp)
 add_library(${SCHEDULER} ${SOURCES} ${HEADERS})
 target_include_directories(${SCHEDULER}
                            PUBLIC ./)
-target_link_libraries(${SCHEDULER}
-                      PUBLIC pthread)
+
+if(UNIX)
+    target_link_libraries(${SCHEDULER}
+                          PUBLIC pthread)
+endif(UNIX)
 
 add_executable(${SCHEDULER}_exe main.cpp ${SOURCES} ${HEADERS})
 target_include_directories(${SCHEDULER}_exe

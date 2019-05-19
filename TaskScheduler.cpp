@@ -34,18 +34,6 @@ void Scheduler::ScheduleRepeatable(std::chrono::system_clock::duration interval,
     this->ScheduleEveryIntern(interval, threadFunc, repeats);
 }
 
-void Scheduler::ScheduleAt(const std::string &time, std::function<void()> func)
-{
-    if (time.find("*") == std::string::npos && time.find("/") == std::string::npos)
-    {
-        std::tm tm = {};
-        strptime(time.c_str(), "%s %M %H %d %m %Y", &tm);
-        auto tp = std::chrono::system_clock::from_time_t(std::mktime(&tm));
-        if (tp > std::chrono::system_clock::now())
-            ScheduleTask(tp, std::move(func));
-    }
-}
-
 void Scheduler::ScheduleTask(const std::chrono::system_clock::time_point &time, std::function<void()> &&func)
 {
     tasks.push(function_timer(std::move(func), time));
